@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# listar qué puertos están abiertas en el servidor y qué programas las están usando.
+netstat -lptu
