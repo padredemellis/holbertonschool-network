@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Script que escucha en el puerto 98 de localhost usando netcat
+nc -l -p 98
