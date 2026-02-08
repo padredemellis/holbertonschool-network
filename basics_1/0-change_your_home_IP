@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Configura /etc/hosts: localhost a 127.0.0.2 y facebook.com a 8.8.8.8
+
+# 1. Cambiar la línea existente de localhost
+# Usamos 'sed' para buscar '127.0.0.1' y cambiarlo por '127.0.0.2'
+# La opción -i edita el archivo directamente (in-place)
+sudo sed -i 's/127.0.0.1/127.0.0.2/' /etc/hosts
+
+# 2. Agregar la redirección de Facebook
+# Usamos 'echo' para crear la línea y la agregamos al final del archivo
+# Como /etc/hosts es un archivo protegido, usamos 'tee -a' (append) con sudo
+echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts > /dev/null
