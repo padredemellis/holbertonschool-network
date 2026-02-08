@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-# listar qué puertos están abiertas en el servidor y qué programas las están usando.
-netstat -lptu
+# This script displays listening TCP and UDP ports with their PID and program name
+
+sudo netstat -tulpn | grep LISTEN
