@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
-# This script displays listening TCP and UDP ports with their PID and program name
+# This script pings an IP address passed as an argument.
 
-sudo netstat -tulpn | grep LISTEN
+if [ -z "$1" ]; then
+    echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
+    exit 1
+fi
+
+ping -c 5 "$1"
