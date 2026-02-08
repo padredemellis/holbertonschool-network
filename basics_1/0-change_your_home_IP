@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
-# Configura /etc/hosts: localhost a 127.0.0.2 y facebook.com a 8.8.8.8
+# Cambia la configuración de hosts evitando el error de Device busy
 
-# 1. Cambiar la línea existente de localhost
-# Usamos 'sed' para buscar '127.0.0.1' y cambiarlo por '127.0.0.2'
-# La opción -i edita el archivo directamente (in-place)
-sudo sed -i 's/127.0.0.1/127.0.0.2/' /etc/hosts
+# 1. Copiamos el archivo hosts a un archivo temporal en tu home
+cp /etc/hosts ~/hosts.new
 
-# 2. Agregar la redirección de Facebook
-# Usamos 'echo' para crear la línea y la agregamos al final del archivo
-# Como /etc/hosts es un archivo protegido, usamos 'tee -a' (append) con sudo
-echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts > /dev/null
+# 2. Hacemos el cambio de IP en ese archivo temporal
+sed -i 's/127.0.0.1/127.0.0.2/g' ~/hosts.new
+
+# 3. Sobrescribimos el archivo original con el contenido del nuevo
+# Usamos 'cp -f' para forzar la copia del contenido
+cp -f ~/hosts.new /etc/hosts
+
+# 4. Agregamos la línea de Facebook al final
+echo "8.8.8.8 facebook.com" >> /etc/hosts
